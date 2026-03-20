@@ -1,26 +1,49 @@
-name: Java Sum CI
+name: Java CI Pipeline
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
-  build-and-run:
+  build-test:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Set up JDK
+      - name: Set up Java (JDK 17)
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Compile Java Program
-        run: javac sum.java
+      - name: Compile Java Code
+        run: javac src/Sum.java
 
-      - name: Run Java Program
-        run: java sum
+      - name: Run Program
+        run: java -cp src Sum 10 20
+
+      - name: Run Test Case 1
+        run: |
+          output=$(java -cp src Sum 5 10)
+          echo "Output: $output"
+          if [[ "$output" == "Sum = 15" ]]; then
+            echo "Test 1 Passed ✅"
+          else
+            echo "Test 1 Failed ❌"
+            exit 1
+          fi
+
+      - name: Run Test Case 2
+        run: |
+          output=$(java -cp src Sum 20 30)
+          echo "Output: $output"
+          if [[ "$output" == "Sum = 50" ]]; then
+            echo "Test 2 Passed ✅"
+          else
+            echo "Test 2 Failed ❌"
+            exit 1
+          fi
