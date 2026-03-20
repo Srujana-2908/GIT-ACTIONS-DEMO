@@ -21,14 +21,14 @@ jobs:
           java-version: '17'
 
       - name: Compile Java Code
-        run: javac src/Sum.java
+        run: javac Sum.java
 
       - name: Run Program
-        run: java -cp src Sum 10 20
+        run: java Sum 10 20
 
       - name: Run Test Case 1
         run: |
-          output=$(java -cp src Sum 5 10)
+          output=$(java Sum 5 10)
           echo "Output: $output"
           if [[ "$output" == "Sum = 15" ]]; then
             echo "Test 1 Passed ✅"
@@ -39,7 +39,7 @@ jobs:
 
       - name: Run Test Case 2
         run: |
-          output=$(java -cp src Sum 20 30)
+          output=$(java Sum 20 30)
           echo "Output: $output"
           if [[ "$output" == "Sum = 50" ]]; then
             echo "Test 2 Passed ✅"
