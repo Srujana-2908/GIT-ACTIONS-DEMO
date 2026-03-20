@@ -1,7 +1,7 @@
-public class sum {
+public class Sum {
     public static void main(String[] args) {
-        int a = 15;
-        int b = 10;
-        System.out.println("difference = " + (a - b));
+        int a = Integer.parseInt(args[0]);
+        int b = Integer.parseInt(args[1]);
+        System.out.println("Sum = " + (a + b));
     }
 }
